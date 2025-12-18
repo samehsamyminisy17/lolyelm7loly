@@ -6,245 +6,284 @@
 <title>عيد ميلاد ليلي ❤️</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
+:root{
+  --pink:#ff69b4;
+  --pink-dark:#ff3b8d;
+  --gold:#ffd700;
+  --glass:rgba(255,255,255,.18);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
-  margin:0;
   font-family:'Cairo',sans-serif;
-  background:linear-gradient(135deg,#ff9a9e,#fad0c4);
-  min-height:100vh;
-  text-align:center;
   color:white;
+  text-align:center;
   overflow-x:hidden;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top,#ffd1dc 0%,transparent 60%),
+    linear-gradient(135deg,#ff9a9e,#fad0c4);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
 }
 
 h1{
-  margin-top:20px;
-  font-size:2.5em;
-  text-shadow:2px 2px 10px #000;
+  margin-top:25px;
+  font-size:2.8em;
+  text-shadow: 2px 2px 5px #000, 0 0 15px var(--pink), 0 0 25px var(--gold);
 }
 
 .profile-pic{
-  width:160px;
-  height:160px;
+  width:165px;
+  height:165px;
   border-radius:50%;
   object-fit:cover;
-  border:5px solid white;
-  margin:20px 0;
-  box-shadow:0 0 20px rgba(0,0,0,.5);
+  border:6px solid rgba(255,255,255,.85);
+  margin:25px 0;
+  box-shadow:0 0 0 8px rgba(255,255,255,.15), 0 20px 40px rgba(0,0,0,.5);
 }
 
-/* أزرار */
 .buttons{
   display:flex;
   justify-content:center;
-  gap:15px;
+  gap:18px;
   flex-wrap:wrap;
-  margin-bottom:30px;
+  margin-bottom:35px;
 }
 
 .btn{
-  background:#ff69b4;
-  padding:15px 30px;
-  border-radius:25px;
+  background:linear-gradient(135deg,var(--pink),var(--pink-dark));
+  padding:16px 34px;
+  border-radius:35px;
   font-size:1.2em;
   cursor:pointer;
-  box-shadow:0 0 15px rgba(0,0,0,.4);
+  box-shadow:0 15px 30px rgba(0,0,0,.45);
+  transition: all 0.4s ease;
 }
 
-.section{ display:none; margin-bottom:90px; }
+.btn:hover{
+  transform: translateY(-5px) scale(1.08) rotate(-1deg);
+  box-shadow: 0 20px 40px rgba(0,0,0,.6);
+}
 
-/* INTRO */
+.section{display:none;margin-bottom:110px;backdrop-filter: blur(12px) saturate(180%); background: var(--glass); border-radius:30px; border:1px solid rgba(255,255,255,0.3);}
+
 #introBox{
   position:fixed; inset:0;
-  background:rgba(0,0,0,.85);
+  background:rgba(0,0,0,.9);
   display:flex; justify-content:center; align-items:center;
   z-index:9999;
 }
 
 .intro-content{
-  background:linear-gradient(135deg,#ff69b4,#ffd700);
-  padding:30px;
-  border-radius:30px;
-  box-shadow:0 0 40px #000;
-  width:85%; max-width:360px;
+  background:linear-gradient(135deg,#ff6aa9,#ffd86a);
+  padding:35px;
+  border-radius:35px;
+  width:85%; max-width:380px;
+  box-shadow:0 40px 80px rgba(0,0,0,.8);
 }
 
-.intro-content h2{ margin-bottom:20px; }
+.intro-content h2{margin-bottom:25px;font-size:1.6em; text-shadow:0 4px 12px rgba(0,0,0,.4);}
 
 .intro-content button{
   width:100%;
-  margin-top:12px;
-  padding:12px;
+  margin-top:14px;
+  padding:14px;
   border:none;
-  border-radius:25px;
+  border-radius:30px;
   font-size:1.1em;
-  background:white;
-  color:#ff4fa3;
   font-weight:bold;
+  cursor:pointer;
+  background:white;
+  color:var(--pink-dark);
+  transition: .3s;
 }
 
-/* الصور */
+.intro-content button:hover{transform:scale(1.05);}
+
 .gallery{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:15px;
-  width:90%; margin:auto;
+  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+  gap:18px;
+  width:92%;
+  margin:auto;
 }
 
 .photo-card{
-  background:rgba(255,255,255,.2);
-  border-radius:20px;
-  padding:10px;
+  background: var(--glass);
+  border-radius:24px;
+  padding:12px;
   opacity:0;
-  transform:translateY(30px);
-  transition:1s;
+  transform:translateY(40px) scale(0.95) rotate(-2deg);
+  transition: transform 0.8s cubic-bezier(.68,-0.55,.265,1.55), opacity 0.8s ease;
 }
 
-.photo-card.show{ opacity:1; transform:translateY(0); }
+.photo-card.show{
+  opacity:1;
+  transform:translateY(0) scale(1) rotate(0deg);
+}
 
-.photo-card img{ width:100%; border-radius:15px; }
+.photo-card img{
+  width:100%;
+  border-radius:18px;
+  box-shadow:0 10px 20px rgba(0,0,0,.4);
+}
 
-/* الرسالة */
 .message-box{
-  width:85%; margin:auto;
-  background:rgba(255,255,255,.15);
-  border-radius:30px;
-  padding:30px;
-  box-shadow:0 0 30px rgba(0,0,0,.5);
+  width:88%;
+  margin:auto;
+  background: var(--glass);
+  border-radius:35px;
+  padding:35px;
+  box-shadow:0 35px 70px rgba(0,0,0,.6);
+  backdrop-filter: blur(12px) saturate(180%);
 }
 
 .magic-rose{
-  font-size:60px;
-  animation:glow 2s infinite alternate;
+  font-size:65px;
+  animation:glow 2.5s infinite alternate;
 }
 
 @keyframes glow{
-  to{ text-shadow:0 0 25px gold; transform:scale(1.1); }
+  to{text-shadow:0 0 40px var(--gold);transform:scale(1.15)}
 }
 
 .message-text{
-  font-size:1.6em;
-  line-height:1.8;
-  margin-top:15px;
+  font-size:1.7em;
+  line-height:1.9;
+  margin-top:18px;
 }
 
 .quote{
-  margin-top:25px;
+  margin-top:28px;
   font-style:italic;
-  font-size:1.2em;
+  font-size:1.25em;
   color:#ffe6a7;
 }
 
-/* الكعكة */
 #counter{
-  background:rgba(255,105,180,.85);
+  background:linear-gradient(135deg,var(--pink),var(--pink-dark));
   display:inline-block;
-  padding:12px 25px;
-  border-radius:30px;
-  font-size:1.4em;
-  margin-bottom:25px;
+  padding:14px 28px;
+  border-radius:40px;
+  font-size:1.45em;
+  margin-bottom:30px;
+  box-shadow:0 10px 25px rgba(0,0,0,.5);
 }
 
 .cake{
   width:420px;
-  height:160px;
-  background:linear-gradient(#ff85c2,#ff4fa3);
-  margin:90px auto 0;
-  border-radius:40px;
+  height:165px;
+  background:linear-gradient(#ff92c8,#ff4fa3);
+  margin:100px auto 0;
+  border-radius:50px;
   position:relative;
-  box-shadow:0 10px 30px rgba(0,0,0,.5);
+  box-shadow:0 20px 40px rgba(0,0,0,.6), inset 0 5px 15px rgba(255,255,255,.4);
 }
 
 .cake::before{
   content:"ليلي";
   position:absolute;
-  top:45%;
-  left:50%;
+  top:50%;left:50%;
   transform:translate(-50%,-50%);
-  font-size:42px;
+  font-size:44px;
   font-weight:bold;
-  text-shadow:0 0 15px white;
+  text-shadow:0 0 25px var(--gold);
 }
 
 .candles{
   position:absolute;
-  top:-45px;
-  width:90%;
-  left:5%;
+  top:-55px;
+  width:92%;
+  left:4%;
   display:flex;
   justify-content:space-around;
 }
 
 .candle{
-  width:12px;
-  height:45px;
-  background:linear-gradient(#ffd700,#ffb700);
-  border-radius:6px;
+  width:13px;
+  height:50px;
+  background:linear-gradient(#ffe066,#ffb700);
+  border-radius:8px;
   cursor:pointer;
   position:relative;
+  box-shadow:0 6px 12px rgba(0,0,0,.4);
 }
 
 .flame{
-  width:14px;
-  height:20px;
-  background:radial-gradient(circle,#fff176,orange,red);
+  width:16px;
+  height:22px;
+  background:radial-gradient(circle,#fff6a3,orange,red);
   border-radius:50%;
   position:absolute;
-  top:-20px;
-  left:-1px;
-  animation:flicker .15s infinite alternate;
+  top:-22px;
+  left:-1.5px;
+  animation:flicker .12s infinite alternate, glowFlame 2s infinite alternate;
 }
 
-@keyframes flicker{ to{transform:scale(.85)} }
+@keyframes flicker{to{transform:scale(.8)}}
+@keyframes glowFlame {
+  0% { box-shadow: 0 0 10px #fff176,0 0 20px #ffeb3b;}
+  50%{ box-shadow: 0 0 25px #fff176,0 0 35px #ffeb3b;}
+  100%{ box-shadow: 0 0 10px #fff176,0 0 20px #ffeb3b;}
+}
 
-/* تأثيرات */
 .drop{
   position:fixed;
   top:-40px;
   font-size:26px;
-  animation:fall 4.5s linear forwards;
-  z-index:999;
+  animation: fall 5s linear forwards, sway 3s ease-in-out infinite alternate;
 }
 
-@keyframes fall{
-  to{transform:translateY(120vh) rotate(360deg)}
+@keyframes fall{to{transform:translateY(120vh) rotate(360deg);opacity:0}}
+@keyframes sway{
+  0%{transform:translateX(0) rotate(0deg);}
+  50%{transform:translateX(20px) rotate(15deg);}
+  100%{transform:translateX(-20px) rotate(-15deg);}
 }
 
 .prayer{
   position:fixed;
   top:-40px;
-  background:rgba(255,105,180,.9);
-  padding:10px 18px;
-  border-radius:25px;
+  background:linear-gradient(135deg,var(--pink),var(--pink-dark));
+  padding:12px 22px;
+  border-radius:35px;
   font-size:18px;
-  animation:fallText 4s ease-out forwards;
-  z-index:999;
+  animation:fallText 4.2s ease-out forwards;
+  box-shadow:0 10px 25px rgba(0,0,0,.5);
 }
 
-@keyframes fallText{
-  to{transform:translateY(150px);opacity:0}
-}
+@keyframes fallText{to{transform:translateY(170px);opacity:0}}
 
 #musicBtn{
   position:fixed;
-  bottom:15px;
-  right:15px;
-  background:#ff69b4;
+  bottom:18px;
+  right:18px;
+  background:linear-gradient(135deg,var(--pink),var(--pink-dark));
   color:white;
   border:none;
-  padding:12px 20px;
-  border-radius:30px;
+  padding:14px 24px;
+  border-radius:40px;
+  cursor:pointer;
+  box-shadow:0 12px 25px rgba(0,0,0,.5);
 }
 
 .final-love{
-  font-size:2em;
-  margin-top:30px;
-  text-shadow:0 0 15px gold;
+  font-size:2.2em;
+  margin-top:35px;
+  text-shadow:0 0 35px var(--gold);
 }
 </style>
 </head>
-
 <body>
 
 <div id="introBox">
@@ -270,8 +309,8 @@ h1{
     <div class="photo-card"><img src="photo2.jpg"><p>روحك 💖</p></div>
     <div class="photo-card"><img src="photo3.jpg"><p>قلبي ❤️</p></div>
     <div class="photo-card"><img src="photo4.jpg"><p>اختياري ✨</p></div>
-     <div class="photo-card"><img src="photo5.jpg"><p>قلبي ❤️</p></div>
-    <div class="photo-card"><img src="photo6.jpg"><p>اول صوره ترللانا لاةتالااتلاارلا تالاتللا ت اللا تالنتنتلالا تاةلانتلااتلاا الالالاتنلاى ات تالاتنتلا نتلاىاتنلالا  ✨</p></div>
+    <div class="photo-card"><img src="photo5.jpg"><p>عمري 🤍</p></div>
+    <div class="photo-card"><img src="photo6.jpg"><p>أول صورة لينا ✨</p></div>
   </div>
 </div>
 
@@ -280,7 +319,7 @@ h1{
     <div class="magic-rose">🌹</div>
     <div class="message-text" id="typed"></div>
     <div class="quote">
-      "قد ترى العين العيب… لكن القلب لا يرى إلا الحب" – الجميلة والوحش
+      "قد ترى العين العيب… لكن القلب لا يرى إلا الحب"
     </div>
   </div>
 </div>
@@ -299,45 +338,33 @@ h1{
 <button id="musicBtn" onclick="bgMusic.play();this.style.display='none'">🎵 موسيقى</button>
 
 <script>
-const counter = document.getElementById("counter");
-const candlesDiv = document.getElementById("candles");
-const finalText = document.getElementById("finalText");
-const typed = document.getElementById("typed");
-const introBox = document.getElementById("introBox");
-const introVoice = document.getElementById("introVoice");
+const counter=document.getElementById("counter");
+const candlesDiv=document.getElementById("candles");
+const finalText=document.getElementById("finalText");
+const typed=document.getElementById("typed");
+const introBox=document.getElementById("introBox");
+const introVoice=document.getElementById("introVoice");
+const bgMusic=document.getElementById("bgMusic");
 
 const prayers=[
 "يارب أيامك ورد 🌹","ربنا يخلي ضحكتك ❤️","يارب قلبك دايمًا مطمن",
-"ربنا يحقق أحلامك ✨","يارب نفضل سوا",
-"ربنا يحميكي 🤍","يارب عمرك كله فرح",
-"ربنا يقوي حبنا 💖","يارب السنة أحلى",
-"ربنا يخليكي ليا","يارب الجاي أجمل",
-"ربنا يجبر بخاطرك","يارب دايمًا تضحكي",
-"ربنا يرضي قلبك","يارب السعادة عنوانك",
-"ربنا يحفظنا لبعض","يارب كل خطوة توفيق",
-"ربنا يبعد عنك الحزن",
-"يارب نكبر سوا",
-"ربنا يكتب الخير لينا",
-"يارب العمر كله حب"
+"ربنا يحقق أحلامك ✨","يارب نفضل سوا","ربنا يحميكي 🤍",
+"يارب عمرك كله فرح","ربنا يقوي حبنا 💖","ربنا السنة أحلى"
 ];
 
 let remaining=21;
 
-/* إنشاء الشموع */
 for(let i=0;i<21;i++){
   const c=document.createElement("div");
   c.className="candle";
   const f=document.createElement("div");
   f.className="flame";
   c.appendChild(f);
-
   c.onclick=()=>{
     if(f.style.display!=="none"){
       f.style.display="none";
       remaining--;
-      counter.textContent = remaining
-        ? `✨ باقي ${remaining} شمعة`
-        : "🎉 كل سنة وإنتي حياتي ❤️";
+      counter.textContent=remaining?`✨ باقي ${remaining} شمعة`:"🎉 كل سنة وإنتي حياتي ❤️";
       effects();
       if(remaining===0){
         finalText.innerHTML="<div class='final-love'>🌹 بحبك… وكل سنة وإنتي ملكة قلبي 🌹</div>";
@@ -347,7 +374,6 @@ for(let i=0;i<21;i++){
   candlesDiv.appendChild(c);
 }
 
-/* تأثيرات */
 function effects(){
   const p=document.createElement("div");
   p.className="prayer";
@@ -356,45 +382,48 @@ function effects(){
   document.body.appendChild(p);
   setTimeout(()=>p.remove(),4000);
 
-  for(let i=0;i<18;i++){
+  for(let i=0;i<15;i++){
     const d=document.createElement("div");
     d.className="drop";
-    d.textContent=["❤️","🍭","🌹"][Math.floor(Math.random()*3)];
+    d.textContent=["❤️","🌹","✨"][Math.floor(Math.random()*3)];
     d.style.left=Math.random()*100+"vw";
     document.body.appendChild(d);
     setTimeout(()=>d.remove(),4500);
   }
 }
 
-/* intro */
-function playIntro(){ introVoice.play(); }
+function playIntro(){
+  introVoice.muted = false;
+  introVoice.volume = 1;
+  introVoice.play().catch(()=>{});
+}
+
 function skipIntro(){
-  introVoice.pause(); introVoice.currentTime=0;
+  introVoice.pause();
+  introVoice.currentTime=0;
   introBox.style.display="none";
 }
+
 introVoice.onended=skipIntro;
 
-/* الرسالة */
 const text=`ليلي…
-زي الجميلة ما شافت القلب قبل الشكل
-أنا شفت فيكي كل اللي يتمناه قلبي ❤️`;
+أنا شفت فيكي القلب قبل أي حاجة
+وكل سنة وإنتي أجمل نعمة في حياتي ❤️`;
 let i=0;
 
 function show(id){
   document.querySelectorAll('.section').forEach(s=>s.style.display='none');
   document.getElementById(id).style.display='block';
-
   if(id==="photos"){
     document.querySelectorAll('.photo-card').forEach((c,i)=>{
       setTimeout(()=>c.classList.add("show"),i*300);
     });
   }
-
   if(id==="message" && i===0){
     (function type(){
       if(i<text.length){
         typed.innerHTML+=text.charAt(i);
-        i++; setTimeout(type,60);
+        i++;setTimeout(type,60);
       }
     })();
   }
