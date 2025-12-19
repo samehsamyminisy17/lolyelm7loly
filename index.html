@@ -75,7 +75,7 @@ h1{
   box-shadow: 0 15px 30px rgba(0,0,0,.6);
 }
 
-.section{display:none;margin-bottom:80px;backdrop-filter: blur(12px) saturate(180%); background: var(--glass); border-radius:25px; border:1px solid rgba(255,255,255,0.3); padding:15px;}
+.section{display:none;margin-bottom:80px;backdrop-filter: blur(15px) saturate(180%); background: rgba(255,255,255,0.05); border-radius:30px; border:2px solid rgba(255,215,0,0.5); padding:20px; box-shadow:0 15px 30px rgba(0,0,0,.5);}
 
 #introBox{
   position:fixed; inset:0;
@@ -110,21 +110,69 @@ h1{
 
 .intro-content button:hover{transform:scale(1.05);}
 
+/* الرسالة Disney-style */
+.message-box{
+  width:90%;
+  max-width:400px;
+  margin:30px auto;
+  background: linear-gradient(145deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+  border-radius:40px;
+  padding:30px;
+  box-shadow:0 30px 60px rgba(0,0,0,.6), inset 0 2px 10px rgba(255,215,0,.2);
+  backdrop-filter: blur(15px) saturate(200%);
+  border:2px solid var(--gold);
+  position:relative;
+}
+
+.magic-rose{
+  font-size:60px;
+  animation:glow 2.5s infinite alternate;
+  display:block;
+  margin:0 auto 15px auto;
+}
+
+@keyframes glow{
+  to{text-shadow:0 0 40px var(--gold);transform:scale(1.15);}
+}
+
+.message-text{
+  font-size:1.5em;
+  line-height:1.8;
+  margin-top:15px;
+  color:#fff7c2;
+  text-align:center;
+  text-shadow:2px 2px 8px #000, 0 0 10px #ffd700;
+}
+
+.quote{
+  margin-top:20px;
+  font-style:italic;
+  font-size:1.15em;
+  color:#ffe6a7;
+}
+
+/* الصور */
 .gallery{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-  gap:12px;
-  width:92%;
-  margin:auto;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:18px;
+  width:95%;
+  margin:40px auto 60px auto;
 }
 
 .photo-card{
-  background: var(--glass);
-  border-radius:20px;
-  padding:8px;
+  background: rgba(255,255,255,0.05);
+  border-radius:25px;
+  padding:10px;
   opacity:0;
   transform:translateY(30px) scale(0.95) rotate(-2deg);
-  transition: transform 0.8s cubic-bezier(.68,-0.55,.265,1.55), opacity 0.8s ease;
+  transition: transform 0.8s cubic-bezier(.68,-0.55,.265,1.55), opacity 0.8s ease, box-shadow 0.3s;
+  box-shadow: 0 10px 25px rgba(0,0,0,.4);
+}
+
+.photo-card:hover{
+  transform:translateY(-5px) scale(1.05) rotate(0deg);
+  box-shadow:0 20px 40px rgba(0,0,0,.6);
 }
 
 .photo-card.show{
@@ -134,62 +182,28 @@ h1{
 
 .photo-card img{
   width:100%;
-  border-radius:15px;
-  box-shadow:0 8px 16px rgba(0,0,0,.4);
+  border-radius:18px;
+  box-shadow:0 10px 25px rgba(0,0,0,.5);
+  transition: transform 0.3s ease;
 }
 
 .photo-card p{
-  margin-top:6px;
-  font-size:0.9em;
+  margin-top:8px;
+  font-size:1.1em;
   color:#fff7c2; 
   font-weight:bold;
-  text-shadow:1px 1px 4px #000;
+  text-shadow:2px 2px 8px #000,0 0 10px #ffd700;
 }
 
-.message-box{
-  width:90%;
-  max-width:360px;
-  margin:auto;
-  background: rgba(0,0,0,0.5); 
-  border-radius:30px;
-  padding:25px;
-  box-shadow:0 25px 50px rgba(0,0,0,.6);
-  backdrop-filter: blur(12px) saturate(180%);
-}
-
-.magic-rose{
-  font-size:50px;
-  animation:glow 2.5s infinite alternate;
-}
-
-@keyframes glow{
-  to{text-shadow:0 0 35px var(--gold);transform:scale(1.15)}
-}
-
-.message-text{
-  font-size:1.4em;
-  line-height:1.6;
-  margin-top:15px;
-  color:#fff7c2; 
-  text-align:center;
-  text-shadow:1px 1px 6px #000;
-}
-
-.quote{
-  margin-top:20px;
-  font-style:italic;
-  font-size:1.1em;
-  color:#ffe6a7;
-}
-
+/* كعكة والشموع */
 #counter{
   background:linear-gradient(135deg,var(--pink),var(--pink-dark));
   display:inline-block;
-  padding:10px 22px;
+  padding:12px 25px;
   border-radius:35px;
-  font-size:1.2em;
-  margin-bottom:20px;
-  box-shadow:0 8px 20px rgba(0,0,0,.5);
+  font-size:1.25em;
+  margin-bottom:25px;
+  box-shadow:0 10px 25px rgba(0,0,0,.5);
 }
 
 .cake{
@@ -200,7 +214,7 @@ h1{
   margin:60px auto 0;
   border-radius:40px;
   position:relative;
-  box-shadow:0 15px 30px rgba(0,0,0,.6), inset 0 4px 12px rgba(255,255,255,.4);
+  box-shadow:0 20px 40px rgba(0,0,0,.6), inset 0 5px 12px rgba(255,255,255,.4);
 }
 
 .cake::before{
@@ -208,9 +222,9 @@ h1{
   position:absolute;
   top:50%;left:50%;
   transform:translate(-50%,-50%);
-  font-size:36px;
+  font-size:38px;
   font-weight:bold;
-  text-shadow:0 0 20px var(--gold);
+  text-shadow:0 0 25px var(--gold);
 }
 
 .candles{
@@ -229,7 +243,7 @@ h1{
   border-radius:6px;
   cursor:pointer;
   position:relative;
-  box-shadow:0 5px 10px rgba(0,0,0,.4);
+  box-shadow:0 6px 12px rgba(0,0,0,.4);
 }
 
 .flame{
@@ -264,7 +278,7 @@ h1{
 
 .prayer{
   background:linear-gradient(135deg,var(--pink),var(--pink-dark));
-  padding:10px 20px;
+  padding:10px 22px;
   border-radius:25px;
   font-size:16px;
   box-shadow:0 8px 20px rgba(0,0,0,.5);
@@ -316,20 +330,9 @@ h1{
 <img src="profile.jpg" class="profile-pic">
 
 <div class="buttons">
-  <div class="btn" onclick="show('photos')">📷 الصور</div>
   <div class="btn" onclick="show('message')">💌 الرسالة</div>
   <div class="btn" onclick="show('cake')">🎂 الكعكة</div>
-</div>
-
-<div class="section" id="photos">
-  <div class="gallery">
-    <div class="photo-card"><img src="photo1.jpg"><p>ضحكتك 🌸</p></div>
-    <div class="photo-card"><img src="photo2.jpg"><p>روحك 💖</p></div>
-    <div class="photo-card"><img src="photo3.jpg"><p>قلبي ❤️</p></div>
-    <div class="photo-card"><img src="photo4.jpg"><p>اختياري ✨</p></div>
-    <div class="photo-card"><img src="photo5.jpg"><p>عمري 🤍</p></div>
-    <div class="photo-card"><img src="photo6.jpg"><p>أول صورة لينا ✨</p></div>
-  </div>
+  <div class="btn" onclick="show('photos')">📷 الصور</div>
 </div>
 
 <div class="section" id="message">
@@ -348,6 +351,17 @@ h1{
     <div class="candles" id="candles"></div>
   </div>
   <div id="finalText"></div>
+</div>
+
+<div class="section" id="photos">
+  <div class="gallery">
+    <div class="photo-card"><img src="photo1.jpg"><p>ضحكتك 🌸</p></div>
+    <div class="photo-card"><img src="photo2.jpg"><p>روحك 💖</p></div>
+    <div class="photo-card"><img src="photo3.jpg"><p>قلبي ❤️</p></div>
+    <div class="photo-card"><img src="photo4.jpg"><p>اختياري ✨</p></div>
+    <div class="photo-card"><img src="photo5.jpg"><p>عمري 🤍</p></div>
+    <div class="photo-card"><img src="photo6.jpg"><p>أول صورة لينا ✨</p></div>
+  </div>
 </div>
 
 <audio id="introVoice" src="intro.mp3"></audio>
