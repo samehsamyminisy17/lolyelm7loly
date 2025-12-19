@@ -75,7 +75,7 @@ h1{
   box-shadow: 0 20px 40px rgba(0,0,0,.6);
 }
 
-.section{display:none;margin-bottom:110px;backdrop-filter: blur(12px) saturate(180%); background: var(--glass); border-radius:30px; border:1px solid rgba(255,255,255,0.3);}
+.section{display:none;margin-bottom:110px;backdrop-filter: blur(12px) saturate(180%); background: var(--glass); border-radius:30px; border:1px solid rgba(255,255,255,0.3); padding:20px;}
 
 #introBox{
   position:fixed; inset:0;
@@ -138,10 +138,18 @@ h1{
   box-shadow:0 10px 20px rgba(0,0,0,.4);
 }
 
+.photo-card p{
+  margin-top:8px;
+  font-size:1em;
+  color:#fff7c2; 
+  font-weight:bold;
+  text-shadow:1px 1px 4px #000;
+}
+
 .message-box{
   width:88%;
   margin:auto;
-  background: var(--glass);
+  background: rgba(0,0,0,0.4); 
   border-radius:35px;
   padding:35px;
   box-shadow:0 35px 70px rgba(0,0,0,.6);
@@ -161,6 +169,8 @@ h1{
   font-size:1.7em;
   line-height:1.9;
   margin-top:18px;
+  color:#fff7c2; 
+  text-shadow:1px 1px 6px #000;
 }
 
 .quote{
@@ -237,32 +247,37 @@ h1{
   100%{ box-shadow: 0 0 10px #fff176,0 0 20px #ffeb3b;}
 }
 
-.drop{
+.drop, .prayer{
   position:fixed;
-  top:-40px;
+  top:-50px;
   font-size:26px;
-  animation: fall 5s linear forwards, sway 3s ease-in-out infinite alternate;
+  z-index:10000;
+  pointer-events:none;
 }
 
-@keyframes fall{to{transform:translateY(120vh) rotate(360deg);opacity:0}}
-@keyframes sway{
-  0%{transform:translateX(0) rotate(0deg);}
-  50%{transform:translateX(20px) rotate(15deg);}
-  100%{transform:translateX(-20px) rotate(-15deg);}
+.drop{
+  animation: fall 4s linear forwards, sway 1.5s ease-in-out infinite alternate;
 }
 
 .prayer{
-  position:fixed;
-  top:-40px;
   background:linear-gradient(135deg,var(--pink),var(--pink-dark));
   padding:12px 22px;
   border-radius:35px;
   font-size:18px;
-  animation:fallText 4.2s ease-out forwards;
   box-shadow:0 10px 25px rgba(0,0,0,.5);
+  animation: fall 6s linear forwards, sway 2s ease-in-out infinite alternate;
 }
 
-@keyframes fallText{to{transform:translateY(170px);opacity:0}}
+@keyframes fall {
+  0% { top:-50px; opacity:1; }
+  100% { top:120vh; opacity:0; }
+}
+
+@keyframes sway {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(15px) rotate(5deg); }
+  100% { transform: translateX(-15px) rotate(-5deg); }
+}
 
 #musicBtn{
   position:fixed;
@@ -349,7 +364,11 @@ const bgMusic=document.getElementById("bgMusic");
 const prayers=[
 "يارب أيامك ورد 🌹","ربنا يخلي ضحكتك ❤️","يارب قلبك دايمًا مطمن",
 "ربنا يحقق أحلامك ✨","يارب نفضل سوا","ربنا يحميكي 🤍",
-"يارب عمرك كله فرح","ربنا يقوي حبنا 💖","ربنا السنة أحلى"
+"يارب عمرك كله فرح","ربنا يقوي حبنا 💖","ربنا السنة أحلى",
+"يارب أيامك كلها ضحك 😄","ربنا يحقق أمانيك 💫","يارب قلبك مليان سلام ☀️",
+"يارب كل لحظة فرح 🎉","ربنا يخلي حياتك أحلى 🌈","يارب أيامك كلها حب ❤️",
+"يارب النجاح دايمًا معاك 🏆","ربنا يحميكي من كل شر 🛡️","يارب العمر كله سعادة 🌸",
+"يارب أحلامك تتحقق 🌟","يارب نفضل سوا دايمًا 🤍","يارب حياتك كلها نور ✨"
 ];
 
 let remaining=21;
@@ -365,7 +384,7 @@ for(let i=0;i<21;i++){
       f.style.display="none";
       remaining--;
       counter.textContent=remaining?`✨ باقي ${remaining} شمعة`:"🎉 كل سنة وإنتي حياتي ❤️";
-      effects();
+      showPrayer(i); // عرض الدعوة المخصصة
       if(remaining===0){
         finalText.innerHTML="<div class='final-love'>🌹 بحبك… وكل سنة وإنتي ملكة قلبي 🌹</div>";
       }
@@ -374,21 +393,28 @@ for(let i=0;i<21;i++){
   candlesDiv.appendChild(c);
 }
 
-function effects(){
-  const p=document.createElement("div");
-  p.className="prayer";
-  p.textContent=prayers[Math.floor(Math.random()*prayers.length)];
-  p.style.left=Math.random()*70+"vw";
+function showPrayer(index){
+  const p = document.createElement("div");
+  p.className = "prayer";
+  p.textContent = prayers[index];
+  p.style.left = Math.random()*80 + "vw";
+  p.style.top = "-50px";
   document.body.appendChild(p);
-  setTimeout(()=>p.remove(),4000);
+  setTimeout(() => {
+    p.style.transition = "opacity 2s";
+    p.style.opacity = 0;
+    setTimeout(() => p.remove(), 2000);
+  }, 6000);
 
+  // قلوب ونجوم متساقطة
   for(let i=0;i<15;i++){
-    const d=document.createElement("div");
-    d.className="drop";
-    d.textContent=["❤️","🌹","✨"][Math.floor(Math.random()*3)];
-    d.style.left=Math.random()*100+"vw";
+    const d = document.createElement("div");
+    d.className = "drop";
+    d.textContent = ["❤️","🍭","🎉","🌹","✨"][Math.floor(Math.random()*5)];
+    d.style.left = Math.random()*90 + "vw";
+    d.style.animationDuration = (3 + Math.random()*2) + "s, " + (1 + Math.random()*1) + "s";
     document.body.appendChild(d);
-    setTimeout(()=>d.remove(),4500);
+    setTimeout(() => d.remove(), 4000);
   }
 }
 
