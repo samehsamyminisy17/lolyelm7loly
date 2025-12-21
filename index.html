@@ -447,16 +447,19 @@ function showPrayer(index){
   document.body.appendChild(p);
   setTimeout(() => p.remove(), 7000);
 
-  for(let i=0;i<15;i++){
-    const d = document.createElement("div");
-    d.className = "drop";
-    d.textContent = ["❤️","🌹","✨","🍓","🥭","🫐","🍭","🍅","🍬",][Math.floor(Math.random()*9)];
-    d.style.left = Math.random()*90 + "vw";
-    d.style.animationDuration = (5 + Math.random()*3) + "s, " + (2 + Math.random()*1) + "s";
-    document.body.appendChild(d);
-    setTimeout(() => d.remove(), 5000);
-  }
-}
+  const drops = ["❤️","🌹","🍉","🍓","🥭","🍒","🍭","🍅","🍬","🍍"];
+
+drops.forEach(icon => {
+  const d = document.createElement("div");
+  d.className = "drop";
+  d.textContent = icon;
+  d.style.left = Math.random()*90 + "vw";
+  d.style.animationDuration =
+    (5 + Math.random()*3) + "s, " +
+    (2 + Math.random()*1) + "s";
+  document.body.appendChild(d);
+  setTimeout(() => d.remove(), 5000);
+});
 
 function playIntro(){
   introVoice.muted = false;
