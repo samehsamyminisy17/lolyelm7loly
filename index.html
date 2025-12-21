@@ -446,18 +446,20 @@ function showPrayer(index){
   p.style.top = "-50px";
   document.body.appendChild(p);
   setTimeout(() => p.remove(), 7000);
+const drops =["❤️","🌹","🍉","🍓","🍒","🍭","🍅","🍬","🍍","😘"];
 
-  
-  for(let i=0;i<15;i++){
-    const d = document.createElement("div");
-    d.className = "drop";
-    d.textContent = ["❤️","🌹","🍉","🍓","🥭","🍒","🍭","🍅","🍬","🍍"][Math.floor(Math.random()*10)];
-    d.style.left = Math.random()*90 + "vw";
-    d.style.animationDuration = (5 + Math.random()*3) + "s, " + (2 + Math.random()*1) + "s";
-    document.body.appendChild(d);
-    setTimeout(() => d.remove(), 5000);
-  }
-  }
+drops.forEach(icon => {
+  const d = document.createElement("div");
+  d.className = "drop";
+  d.textContent = icon;
+  d.style.left = Math.random()*90 + "vw";
+  d.style.animationDuration =
+    (5 + Math.random()*3) + "s, " +
+    (2 + Math.random()*1) + "s";
+  document.body.appendChild(d);
+  setTimeout(() => d.remove(), 5000);
+});
+}
 
 function playIntro(){
   introVoice.muted = false;
@@ -505,7 +507,7 @@ function show(id){
     cakeMusic.pause();
     cakeMusic.currentTime = 0;
   }
-
+ 
   if(bgMusic.paused){
     bgMusic.play().catch(()=>{});
   }
@@ -526,5 +528,6 @@ document.querySelectorAll('.photo-card').forEach(card=>{
 
 </body>
 </html>
+
 
 
