@@ -339,7 +339,7 @@ h1{
 #loveCounter .big{
   font-size:1.25em;
   font-weight:700;
-white-space: nowrap;
+
 }
 
 #loveCounter .total{
@@ -448,24 +448,28 @@ const cakeMusic=document.getElementById("cakeMusic");
 /* ===== عداد الحب ===== */
 const loveCounter = document.getElementById("loveCounter");
 const startDate = new Date(2025,4,27,0,0,0); // 27 / 5 / 2025
-
 function updateLoveCounter(){
   const now = new Date();
   const diffMs = now - startDate;
 
-  const totalMinutes = Math.floor(diffMs / (1000 * 60));
+  const totalSeconds = Math.floor(diffMs / 1000);
+  const totalMinutes = Math.floor(diffMs / 60 / 1000);
   const totalHours   = Math.floor(diffMs / (1000 * 60 * 60));
   const totalDays    = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
-  // حساب الشهور
-  let months =
-    (now.getFullYear() - startDate.getFullYear()) * 12 +
-    (now.getMonth() - startDate.getMonth());
+  // حساب السنوات والشهور
+  let years = now.getFullYear() - startDate.getFullYear();
+  let months = now.getMonth() - startDate.getMonth();
+  if (months < 0) { 
+    years--; 
+    months += 12; 
+  }
 
   if (now.getDate() < startDate.getDate()) months--;
 
   // المتبقي داخل الشهر
   let tempDate = new Date(startDate);
+  tempDate.setFullYear(tempDate.getFullYear() + years);
   tempDate.setMonth(tempDate.getMonth() + months);
 
   const diffInsideMonth = now - tempDate;
@@ -476,12 +480,14 @@ function updateLoveCounter(){
 
   loveCounter.innerHTML = `
     <div class="big">💗 بقالنا مع بعض</div>
-    <div class="big">${months} شهور : ${days} يوم : ${hours} ساعات : ${minutes} دقيقة : ${seconds} ثانية</div>
+
+    <div class="big">${years} سنة : ${months} شهور : ${days} يوم : ${hours} ساعات : ${minutes} دقائق : ${seconds} ثواني</div>
     <div class="total">
-      ✨ إجمالي: ${totalDays} يوم · ${totalHours} ساعة · ${totalMinutes} دقيقة
+      ✨ إجمالي: ${totalDays} يوم · ${totalHours} ساعة · ${totalMinutes} دقيقة · ${totalSeconds} ثانية
     </div>
   `;
 }
+
 
 setInterval(updateLoveCounter, 1000);
 updateLoveCounter();
