@@ -357,6 +357,35 @@ h1{
     <button onclick="skipIntro()">✨ لما تخلص دوس هنا يمحلولي</button>
   </div>
 </div>
+<!-- فيديو بعد الانترو -->
+<div id="videoBox" style="
+  position:fixed;
+  inset:0;
+  background:black;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9998;
+">
+  <video id="introVideo"
+         src="intro.mp4"
+         playsinline
+         controls
+         style="width:100%;max-width:420px;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,.8)">
+  </video>
+
+  <button onclick="closeVideo()" style="
+    position:absolute;
+    bottom:30px;
+    background:linear-gradient(135deg,#ff69b4,#ff3b8d);
+    color:white;
+    border:none;
+    padding:12px 24px;
+    border-radius:30px;
+    font-size:16px;
+    cursor:pointer;
+  ">✨ كملي يا لولتي</button>
+</div>
 
 <h1>❤️عيد ميلاد لولتي انا </h1>
 <img src="profile.jpg" class="profile-pic">
@@ -555,11 +584,18 @@ function playIntro(){
   introVoice.volume = 1;
   introVoice.play().catch(()=>{});
 }
-
 function skipIntro(){
   introVoice.pause();
-  introVoice.currentTime=0;
-  introBox.style.display="none";
+  introVoice.currentTime = 0;
+  introBox.style.display = "none";
+
+  // تشغيل الفيديو بعد الانترو
+  const videoBox = document.getElementById("videoBox");
+  const introVideo = document.getElementById("introVideo");
+
+  videoBox.style.display = "flex";
+  introVideo.currentTime = 0;
+  introVideo.play().catch(()=>{});
 }
 
 introVoice.onended=skipIntro;
@@ -613,6 +649,15 @@ document.querySelectorAll('.photo-card').forEach(card=>{
     card.classList.toggle("show-text");
   };
 });
+function closeVideo(){
+  const videoBox = document.getElementById("videoBox");
+  const introVideo = document.getElementById("introVideo");
+
+  introVideo.pause();
+  introVideo.currentTime = 0;
+  videoBox.style.display = "none";
+}
+
 </script>
 
 </body>
